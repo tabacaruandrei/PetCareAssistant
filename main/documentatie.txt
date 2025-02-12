@@ -1,0 +1,32 @@
+===================
+PetCareAssistant - o aplicatie client/server TCP pentru ingrijirea si monitorizarea animalelor de companie
+===================
+
+
+MOD DE UTILIZARE
+
+Aplicatia este una de tip CLI (command-line interface), mai exact o aplicatie care se utilizeaza prin intermediul command prompt-ului, care ia input-uri de la tastatura.
+
+Pasii de rulare sunt urmatorii:
+
+1. compilarea
+
+Atat serverul cat si client-ul/ii vor fi compilati cu comanda de la tastatura 'gcc server.c -o server', respectiv 'gcc client.c -o client'.
+
+2. rularea
+
+Mai intai vom porni server-ul prin intermediul comenzii './server' , ce va astepta clienti la portul 2908. 
+Clientii se vor conecta cu comanda './client [local_host] 2908' , unde local_host este de obicei 127.0.0.1.
+
+3. aplicatia
+
+Clientii vor fi intampinati de prompt-ul aplicatiei, care le va oferi cateva optiuni de inceput: logare, inregistrare, schimbarea parolei sau exit. Utilizatorii pot alege optiunile fie prin scrierea cifrei corespunzatoare fiecarei operatii sau scrierii pur si simplu a functiei pe care si-o doresc sa o foloseasca.
+Utilizatorii vor fi indrumati de catre aplicatie la fiecare pas, inclusiv ce trebuie sa insereze pentru fiecare din cerinte. 
+
+Daca de exemplu, utilizatorii vor introduce informatii gresite, server-ul ii va trimite la prompt-ul de inceput, fie cel de autentificare respectiv cel al aplicatiei in sine.
+
+Odata autentificati, utilizatorii pot sa isi listeze animalele detinute, sa afle detalii despre acestea, sa adauge alte animale, sa le modifice pe cele existente sau chiar sa le stearga din registru. Cand utilizatorii vor sa se opreasca, pot pur si simplu sa revina la prompt-ul de autentificare prin comanda de logout, sau sa iasa din aplicatie cu totul.
+
+O alta particularitate a aplicatiei este registrul de utilizatori conectati. Daca un client este conectat deja pe un cont, orice alt client care incearca sa se conecteze la acesta sau sa ii schimbe parola nu va putea realiza acest lucru atata timp cat pe acel utilizator s-a conectat un client.
+
+Pentru a asigura o conexiune concurenta, fara suprapuneri, am utilizat arhitectura TCP concurenta, cu thread-uri pentru fiecare client, plus mutex lock-uri atasate de catre client pe fisierele in uz.
